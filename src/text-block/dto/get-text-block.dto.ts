@@ -36,5 +36,4 @@ export class GetTextBlockDto {
     @Length(1, 30, {message: 'От 1 по 30 символов'})
     @IsOptional()
     readonly group: string;
-
 }

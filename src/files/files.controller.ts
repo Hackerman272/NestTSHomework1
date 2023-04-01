@@ -6,6 +6,7 @@ import {RolesGuard} from "../auth/roles.guard";
 import {EditFilesDto} from "./dto/edit-files.dto";
 import {ApiOperation, ApiResponse} from "@nestjs/swagger";
 import {DeleteFilesDto} from "./dto/delete-files.dto";
+import {GetFilesDto} from "./dto/get-files.dto";
 
 @Controller('files')
 export class FilesController {
@@ -57,5 +58,15 @@ export class FilesController {
     @Get()
     getFiles(){
         return this.filesService.getFiles();
+    }
+
+    @ApiOperation({summary: "Получение в т.ч. названий для составления ссылок на файлы"})
+    @ApiResponse({status: 200})
+    // @UseGuards(JwtAuthGuard)  // проверка по токену
+    @Roles("ADMIN")
+    @UseGuards(RolesGuard)
+    @Post('/byValues')
+    getFilesByValues(@Body() dto: GetFilesDto){
+        return this.filesService.getFilesByValues(dto);
     }
 }

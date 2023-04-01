@@ -7,6 +7,8 @@ import {File} from "./files.model";
 import {EditFilesDto} from "./dto/edit-files.dto";
 import {DeleteFilesDto} from "./dto/delete-files.dto";
 import {Op} from "sequelize";
+import {GetTextBlockDto} from "../text-block/dto/get-text-block.dto";
+import {GetFilesDto} from "./dto/get-files.dto";
 
 @Injectable()
 export class FilesService {
@@ -88,6 +90,11 @@ export class FilesService {
 
     async getFiles() {
         const files = await this.fileRepository.findAll({include: {all: true}})
+        return files;
+    }
+
+    async getFilesByValues(dto: GetFilesDto) {
+        const files = await this.fileRepository.findAll({where: {...dto}})
         return files;
     }
 }
