@@ -40,29 +40,12 @@ export class ProfileService {
         if (!profile) {
             throw new HttpException('Профиля не существует', HttpStatus.NOT_FOUND)
         }
-        console.log(profile.userId)
         return profile.userId
     }
 
 
-    // async getAllProfile() {
-    //     const Profile = await this.ProfileRepository.findAll({include: {all: true}})
-    //     return Profile;
-    // }
-    //
-    // async getProfileByEmail(email: string) {
-    //     const Profile = await this.ProfileRepository.findOne({where: {email}, include: {all: true}})
-    //     return Profile
-    // }
-    //
-    // async addRole(dto: EditProfileDto){
-    //     const Profile = await this.ProfileRepository.findByPk(dto.ProfileId);
-    //     const role = await this.roleService.getRoleByValue(dto.value);
-    //     if (role && Profile) {
-    //         await Profile.$add('role', role.id);
-    //         return dto;
-    //     }
-    //     throw new HttpException('Пользователь или роль не найдены...', HttpStatus.NOT_FOUND);
-    // }
-    //
+    async getAllProfiles() {
+        const profiles = await this.profileRepository.findAll({include: {all: true}})
+        return profiles;
+    }
 }

@@ -17,6 +17,7 @@ import * as path from 'path';
 import {Profile} from "./profile/profile.model";
 import { TextBlockModule } from './text-block/text-block.module';
 import {TextBlock} from "./text-block/text-block.model";
+import {File} from "./files/files.model";
 
 @Module({
   controllers: [],
@@ -35,7 +36,7 @@ import {TextBlock} from "./text-block/text-block.model";
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      models: [User, Role, UserRoles, Post, Profile, TextBlock],
+      models: [User, Role, UserRoles, Post, Profile, TextBlock, File],
       autoLoadModels: true
     }),
     UsersModule,

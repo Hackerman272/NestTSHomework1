@@ -1,9 +1,10 @@
-import {IsNumber, IsOptional, IsString, Length} from "class-validator";
+import {IsArray, IsNumber, IsOptional, IsString, Length} from "class-validator";
 import {ApiProperty} from "@nestjs/swagger";
 
 export class EditTextBlockDto {
     @IsNumber()
     readonly textBlockId: number;
+
     @ApiProperty({example: 'main-hero-text', description: "Уникальное название блока текста"})
     @IsString({message: "Должна быть строка"})
     @Length(1, 30, {message: 'От 1 по 30 символов'})
@@ -27,5 +28,10 @@ export class EditTextBlockDto {
     @Length(1, 30, {message: 'От 1 по 30 символов'})
     @IsOptional()
     readonly group: string;
+
+    @ApiProperty({example: [1, 2, 3], description: "id скриншотов для отвязки"})
+    @IsArray()
+    @IsOptional()
+    readonly unlinkFilesIds: number[];
 
 }

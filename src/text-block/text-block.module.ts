@@ -5,6 +5,7 @@ import {SequelizeModule} from "@nestjs/sequelize";
 import {TextBlock} from "./text-block.model";
 import {AuthModule} from "../auth/auth.module";
 import {ProfileModule} from "../profile/profile.module";
+import {FilesModule} from "../files/files.module";
 
 @Module({
   providers: [TextBlockService],
@@ -12,6 +13,7 @@ import {ProfileModule} from "../profile/profile.module";
   imports: [
     forwardRef( () => AuthModule),
     forwardRef( () => ProfileModule),
+    forwardRef( () => FilesModule),
     SequelizeModule.forFeature([TextBlock])
   ]
 })

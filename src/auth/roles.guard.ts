@@ -44,6 +44,8 @@ export class RolesGuard implements CanActivate {
 
         request.user = user;
         // + проверка того, что профиль принадлежит автору запроса
+        // !!! уязвимость, можно подставить для любого несвязанного запроса profileId совпадающий со своим токеном
+            // и получить доступ к любому эндпоинту. Необходимо разрганичить (разные декораторы?)
         if (request.body.profileId) {
             const userId = await this.profileService.getUserIdByProfileId(request.body.profileId)
             if (userId === user.id) {

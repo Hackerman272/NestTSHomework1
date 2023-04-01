@@ -21,5 +21,4 @@ export class CreateTextBlockDto {
     @IsString({message: "Должна быть строка"})
     @Length(1, 30, {message: 'От 1 по 30 символов'})
     readonly group: string;
-
 }
