@@ -94,6 +94,12 @@ export class FilesService {
     }
 
     async getFilesByValues(dto: GetFilesDto) {
+        if (dto.id === null) {
+            const files = await this.fileRepository.findAll(
+                {where: {essenceId: dto.essenceId,
+                                essenceTable: dto.essenceTable}})
+            return files;
+        }
         const files = await this.fileRepository.findAll({where: {...dto}})
         return files;
     }

@@ -59,8 +59,17 @@ export class TextBlockService {
     }
 
     async get(dto: GetTextBlockDto) {
-        console.log({...dto})
         const textBlocks = await this.textBlockRepository.findAll({where: {...dto}})
-        return textBlocks;
+        let textBlocksWithFiles = []
+        for (let textBlock in textBlocks) {
+            textBlocksWithFiles.push({
+                ...textBlocks[textBlock].dataValues,
+                files: await this.fileService.getFilesByValues(
+                    {essenceId: textBlocks[textBlock].id,
+                        essenceTable: this.textBlockRepository.tableName,
+                        id: null})
+            })
+        }
+        return textBlocksWithFiles;
     }
 }

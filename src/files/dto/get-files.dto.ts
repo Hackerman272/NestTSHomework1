@@ -5,7 +5,7 @@ export class GetFilesDto {
     @ApiProperty({example: [1, 2, 3], description: "id скриншотов для привязки"})
     @IsArray()
     @IsOptional()
-    readonly id: number[];
+    readonly id: number[] | null;
 
     @ApiProperty({example: 'text-blocks', description: "название таблицы"})
     @IsString({message: "Должна быть строка"})
