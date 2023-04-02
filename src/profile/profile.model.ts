@@ -1,10 +1,7 @@
 import {Model, Table, Column, BelongsToMany, HasMany, BelongsTo, ForeignKey} from "sequelize-typescript"
 import {DataTypes} from "sequelize";
 import {ApiProperty} from "@nestjs/swagger";
-import {Role} from "../roles/roles.model";
-import {Post} from "../posts/posts.model";
 import {User} from "../users/user.model";
-import {IsEmail, IsPhoneNumber, IsString, Length} from "class-validator";
 
 interface ProfileCreationAttrs {
     email: string;
@@ -38,7 +35,7 @@ export class Profile extends Model<Profile, ProfileCreationAttrs> {
     @Column({type: DataTypes.STRING, allowNull: false})
     phoneNumber: string;
 
-    @ForeignKey(() => User)
+    @ForeignKey(() => User) // связь с user 1 к 1
     @Column({type: DataTypes.INTEGER})
     userId: number;
 

@@ -1,4 +1,4 @@
-import {Body, Injectable} from '@nestjs/common';
+import {Injectable} from '@nestjs/common';
 import {CreatePostDto} from "./dto/create-post.dto";
 import {InjectModel} from "@nestjs/sequelize";
 import {Post} from "./posts.model";

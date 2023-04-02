@@ -1,6 +1,5 @@
-import {IsEmail, IsNumber, IsOptional, IsPhoneNumber, IsString, Length, MaxLength} from "class-validator";
+import {IsNumber, IsOptional, IsPhoneNumber, IsString, Length, MaxLength} from "class-validator";
 import {ApiProperty} from "@nestjs/swagger";
-import {IsNumeric} from "sequelize-typescript";
 
 export class EditProfileDto {
     @ApiProperty({example: '123', description: "id профиля"})

@@ -17,10 +17,11 @@ export class FilesController {
     @UseInterceptors(FileInterceptor('image'))
     addFile(@UploadedFile() image){
         // в ответе есть название файла, добавив к домену которое можно сделать предпросмотр загруженного файла
-        // есть ли необходимость в целях безопасности убрать filePath из ответа?
+        // Вопрос: есть ли необходимость в целях безопасности убрать filePath из ответа?
         return this.filesService.createFile(image)
     }
 
+    // Прикрепление файла к сущности через редактирование
     // по API возможность привязывать скриншоты не выдаю никому, кроме админа, чтобы нельзя было пользователю закинуть
     // скриншоты к чужим постам, например.
     @Roles("ADMIN")
@@ -32,7 +33,6 @@ export class FilesController {
 
     @ApiOperation({summary: "Удаление файла"})
     @ApiResponse({status: 200})
-    // @UseGuards(JwtAuthGuard)  // проверка по токену
     @Roles("ADMIN")
     @UseGuards(RolesGuard)
     @Post('/delete')
@@ -42,7 +42,6 @@ export class FilesController {
 
     @ApiOperation({summary: "Удаление файла"})
     @ApiResponse({status: 200})
-    // @UseGuards(JwtAuthGuard)  // проверка по токену
     @Roles("ADMIN")
     @UseGuards(RolesGuard)
     @Post('/deleteOlds')
@@ -52,7 +51,6 @@ export class FilesController {
 
     @ApiOperation({summary: "Получение в т.ч. названий для составления ссылок на файлы"})
     @ApiResponse({status: 200})
-    // @UseGuards(JwtAuthGuard)  // проверка по токену
     @Roles("ADMIN")
     @UseGuards(RolesGuard)
     @Get()
@@ -62,7 +60,6 @@ export class FilesController {
 
     @ApiOperation({summary: "Получение в т.ч. названий для составления ссылок на файлы"})
     @ApiResponse({status: 200})
-    // @UseGuards(JwtAuthGuard)  // проверка по токену
     @Roles("ADMIN")
     @UseGuards(RolesGuard)
     @Post('/byValues')

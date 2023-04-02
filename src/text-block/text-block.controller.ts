@@ -67,7 +67,7 @@ export class TextBlockController {
     }
 
     @Get()
-    getTextBlocks(@Query() dto: GetTextBlockDto){ // ??? как работать с параметрами?
+    getTextBlocks(@Query() dto: GetTextBlockDto){
         return this.textBlockService.get(dto)
     }
 }

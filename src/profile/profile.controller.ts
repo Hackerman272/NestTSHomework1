@@ -16,8 +16,8 @@ export class ProfileController {
     }
     @ApiOperation({summary: "Создание профиля"})
     @ApiResponse({status: 200, type: Profile})
-    @UsePipes(ValidationPipe)
-    @Post()
+    @UsePipes(ValidationPipe) // удобное отображение не прошедших валидацию полей
+    @Post() // тип запроса
     create(@Body() profileDto: CreateProfileDto) {
         return this.profileService.createProfile(profileDto);
     }
@@ -25,8 +25,9 @@ export class ProfileController {
     @ApiOperation({summary: "Удаление профиля"})
     @ApiResponse({status: 200})
     // @UseGuards(JwtAuthGuard)  // проверка по токену
-    @Roles("ADMIN")
-    @UseGuards(RolesGuard)
+    @Roles("ADMIN") // Роли, которым доступен запрос
+    @UsePipes(ValidationPipe)
+    @UseGuards(RolesGuard) // Вызов кода проверки ролей И проверки того, что профиль принадлежит автору запроса. Потенциальная уязвимость для иных модулей, можно сделать 2 метода для профиля и остальных
     @Post('/delete')
     delete(@Body() profileDto: DeleteProfileDto){
         return this.profileService.deleteProfile(profileDto);
@@ -44,9 +45,9 @@ export class ProfileController {
 
     @ApiOperation({summary: "Получить все профили"})
     @ApiResponse({status: 200, type: [User]})
-    // @UseGuards(JwtAuthGuard)  // проверка по токену
     @Roles("ADMIN")
     @UseGuards(RolesGuard)
+    @UsePipes(ValidationPipe)
     @Get()
     getAll(){
         return this.profileService.getAllProfiles();
