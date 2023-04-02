@@ -1,11 +1,7 @@
 import {
     IsArray,
-    IsEmail,
     IsNumber,
-    IsOptional,
-    IsPhoneNumber,
     IsString,
-    Length,
     MaxLength,
     ValidateIf
 } from "class-validator";

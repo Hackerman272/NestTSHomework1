@@ -7,7 +7,7 @@ import {
     Query,
     UploadedFiles,
     UseGuards,
-    UseInterceptors
+    UseInterceptors, UsePipes
 } from '@nestjs/common';
 import {TextBlockService} from "./text-block.service";
 import {Roles} from "../auth/roles-auth.decorator";
@@ -17,6 +17,7 @@ import {EditTextBlockDto} from "./dto/edit-text-block.dto";
 import {DeleteTextBlockDto} from "./dto/delete-text-block.dto";
 import {GetTextBlockDto} from "./dto/get-text-block.dto";
 import {FileFieldsInterceptor} from "@nestjs/platform-express";
+import {ValidationPipe} from "../pipes/validation.pipe";
 
 @Controller('text-block')
 export class TextBlockController {
@@ -24,6 +25,7 @@ export class TextBlockController {
     }
     @Roles("ADMIN")
     @UseGuards(RolesGuard)
+    @UsePipes(ValidationPipe)
     @Post()
     @UseInterceptors(FileFieldsInterceptor([
         { name: 'previewImage', maxCount: 1},
@@ -43,6 +45,7 @@ export class TextBlockController {
 
     @Roles("ADMIN")
     @UseGuards(RolesGuard)
+    @UsePipes(ValidationPipe)
     @Post('/edit')
     @UseInterceptors(FileFieldsInterceptor([
         { name: 'previewImage', maxCount: 1},
@@ -61,6 +64,7 @@ export class TextBlockController {
 
     @Roles("ADMIN")
     @UseGuards(RolesGuard)
+    @UsePipes(ValidationPipe)
     @Post('/delete')
     deleteTextBlock(@Body() dto: DeleteTextBlockDto){
         return this.textBlockService.delete(dto)

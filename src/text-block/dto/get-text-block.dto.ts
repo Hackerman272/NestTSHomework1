@@ -2,9 +2,9 @@ import {IsNumber, IsOptional, IsString, Length} from "class-validator";
 import {ApiProperty} from "@nestjs/swagger";
 import {Transform} from "class-transformer";
 import {toNumber, trim} from "../../common/helper/cast.helper";
-import {doc} from "prettier";
 
 export class GetTextBlockDto {
+    // Transform для работы с параметрами запроса
     @Transform(({ value }) => toNumber(value, { default: 0, min: 0 }))
     @IsNumber()
     @IsOptional()

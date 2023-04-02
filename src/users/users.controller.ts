@@ -3,7 +3,6 @@ import {CreateUserDto} from "./dto/create-user.dto";
 import {UsersService} from "./users.service";
 import {ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
 import {User} from "./user.model";
-import {JwtAuthGuard} from "../auth/jwt-auth.guard";
 import {RolesGuard} from "../auth/roles.guard";
 import {Roles} from "../auth/roles-auth.decorator";
 import {AddRoleDto} from "./dto/add-role.dto";
@@ -28,7 +27,6 @@ export class UsersController {
 
     @ApiOperation({summary: "Получить всех пользователей"})
     @ApiResponse({status: 200, type: [User]})
-    // @UseGuards(JwtAuthGuard)  // проверка по токену
     @Roles("ADMIN")
     @UseGuards(RolesGuard)
     @Get()
@@ -38,7 +36,6 @@ export class UsersController {
 
     @ApiOperation({summary: "Раздача ролей"})
     @ApiResponse({status: 200})
-    // @UseGuards(JwtAuthGuard)  // проверка по токену
     @Roles("ADMIN")
     @UseGuards(RolesGuard)
     @Post('/role')
@@ -48,7 +45,6 @@ export class UsersController {
 
     @ApiOperation({summary: "Бан пользователей"})
     @ApiResponse({status: 200})
-    // @UseGuards(JwtAuthGuard)  // проверка по токену
     @Roles("ADMIN")
     @UseGuards(RolesGuard)
     @Post('/ban')
